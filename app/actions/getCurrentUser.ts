@@ -1,8 +1,6 @@
-import { getServerSession } from 'next-auth/next';
-
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
-
 import prisma from '@/app/libs/primasdb';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { getServerSession } from 'next-auth/next';
 
 export async function getSession() {
   return await getServerSession(authOptions);
@@ -23,6 +21,7 @@ export default async function getCurrentUser() {
     if (!currentUser) {
       return null;
     }
+    return currentUser;
   } catch (error: any) {
     return null;
   }
