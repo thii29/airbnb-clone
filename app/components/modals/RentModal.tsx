@@ -1,4 +1,5 @@
 'use client';
+import dynamic from 'next/dynamic';
 import { useMemo, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import Heading from '../Heading';
@@ -7,7 +8,6 @@ import CategoryInput from '../inputs/CategoryInput';
 import CountrySelect from '../inputs/CountrySelect';
 import { categories } from '../navbar/Categories';
 import Modal from './Modal';
-import dynamic from 'next/dynamic';
 //import Map from '../Map';
 enum STEPS {
   CATEGORY = 0,
@@ -44,9 +44,13 @@ const RentModal = () => {
   const category = watch('category');
   const location = watch('location');
 
-  const Map = useMemo(()=>dynamic(()=>import('../Map'),{
-    ssr: false
-  }), [location])
+  const Map = useMemo(
+    () =>
+      dynamic(() => import('../Map'), {
+        ssr: false,
+      }),
+    [location]
+  );
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldValidate: true,
@@ -102,10 +106,10 @@ const RentModal = () => {
           subtitle="Help guests find you!"
         />
         <CountrySelect
-        value={location}
+          value={location}
           onChange={(value) => setCustomValue('location', value)}
         />
-        <Map center={location?.latlng}/>
+        <Map center={location?.latlng} />
       </div>
     );
   }
