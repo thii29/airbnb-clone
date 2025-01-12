@@ -15,7 +15,6 @@ import Input from '../inputs/Input';
 import { categories } from '../navbar/Categories';
 import Modal from './Modal';
 //import Map from '../Map';
-
 enum STEPS {
   CATEGORY = 0,
   LOCATION = 1,
