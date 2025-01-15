@@ -2,6 +2,7 @@
 import { SafeUser } from '@/app/types';
 import Image from 'next/image';
 import Heading from '../Heading';
+import HeartButton from '../HeartButton';
 import useCountries from '../hooks/useCountries';
 
 interface ListingHeadProps {
@@ -34,6 +35,9 @@ const ListingHead: React.FC<ListingHeadProps> = ({
           fill
           className="object-cover w-full"
         />
+        <div className="absolute top-5 right-5">
+          <HeartButton listingId={id} currentUser={currentUser} />
+        </div>
       </div>
     </>
   );
