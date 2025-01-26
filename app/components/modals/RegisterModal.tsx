@@ -1,5 +1,6 @@
 'use client';
 import axios from 'axios';
+import { signIn } from 'next-auth/react';
 import { useCallback, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -7,9 +8,8 @@ import { AiFillGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import Button from '../Button';
 import Heading from '../Heading';
-import useRegisterModal from '../hooks/useRegisterModal';
 import useLoginModal from '../hooks/useLoginModal';
-import { signIn } from 'next-auth/react';
+import useRegisterModal from '../hooks/useRegisterModal';
 import Input from '../inputs/Input';
 import Modal from './Modal';
 
@@ -36,6 +36,7 @@ const RegisterModal = () => {
       .post('/api/register', data)
       .then(() => {
         registerModal.onClose();
+        loginModal.onOpen();
       })
       .catch((error) => {
         toast.error('Something went wrong!');
