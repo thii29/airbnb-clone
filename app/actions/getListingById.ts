@@ -1,4 +1,4 @@
-import prisma from '@/app/libs/primasdb';
+import prisma from '@/app/libs/prismadb';
 
 interface IParams {
   listingId?: string;
@@ -27,6 +27,6 @@ export default async function getListingById(params: IParams) {
       emailVerified: listing.user.emailVerified?.toISOString() || null,
     };
   } catch (error: any) {
-    throw new Error(error)
+    throw new Error(error);
   }
 }

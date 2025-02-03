@@ -1,4 +1,4 @@
-import prisma from '@/app/libs/primasdb';
+import prisma from '@/app/libs/prismadb';
 
 interface IParam {
   listingId?: string;
@@ -43,7 +43,7 @@ export default async function getReservations(params: IParam) {
       },
     }));
     return safeReservations;
-  } catch(error: any){
+  } catch (error: any) {
     throw new Error(error);
   }
 }
