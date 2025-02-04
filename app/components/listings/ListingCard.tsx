@@ -3,10 +3,10 @@ import { format } from 'date-fns';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
+import useCountries from '../../hooks/useCountries';
 import { SafeListing, SafeReservations, SafeUser } from '../../types';
 import Button from '../Button';
 import HeartButton from '../HeartButton';
-import useCountries from '../hooks/useCountries';
 
 interface ListingCardProps {
   data: SafeListing;

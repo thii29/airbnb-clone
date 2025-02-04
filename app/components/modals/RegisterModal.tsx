@@ -6,10 +6,10 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { AiFillGithub } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
+import useLoginModal from '../../hooks/useLoginModal';
+import useRegisterModal from '../../hooks/useRegisterModal';
 import Button from '../Button';
 import Heading from '../Heading';
-import useLoginModal from '../hooks/useLoginModal';
-import useRegisterModal from '../hooks/useRegisterModal';
 import Input from '../inputs/Input';
 import Modal from './Modal';
 
@@ -35,7 +35,7 @@ const RegisterModal = () => {
     axios
       .post('/api/register', data)
       .then(() => {
-        toast.success('Success!')
+        toast.success('Success!');
         registerModal.onClose();
         loginModal.onOpen();
       })

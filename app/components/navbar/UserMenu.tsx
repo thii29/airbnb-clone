@@ -4,10 +4,10 @@ import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
+import useLoginModal from '../../hooks/useLoginModal';
+import useRegisterModal from '../../hooks/useRegisterModal';
+import useRentModal from '../../hooks/useRentModal';
 import Avatar from '../Avatar';
-import useLoginModal from '../hooks/useLoginModal';
-import useRegisterModal from '../hooks/useRegisterModal';
-import useRentModal from '../hooks/useRentModal';
 import MenuItem from './MenuItem';
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -69,7 +69,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                   onClick={() => router.push('/reservations')}
                   label="My reservations"
                 />
-                <MenuItem onClick={() => router.push('/properties')} label="My properties" />
+                <MenuItem
+                  onClick={() => router.push('/properties')}
+                  label="My properties"
+                />
                 <MenuItem onClick={rentModal.onOpen} label="Airbnb my home" />
                 <hr />
                 <MenuItem onClick={() => signOut()} label="Log out" />
