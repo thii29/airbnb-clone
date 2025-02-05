@@ -8,7 +8,10 @@ import { formatISO } from 'date-fns';
 import dynamic from 'next/dynamic';
 import { useCallback, useMemo, useState } from 'react';
 import { Range } from 'react-date-range';
-import { CountrySelectValue } from '../inputs/CountrySelect';
+import Heading from '../Heading';
+import Calendar from '../inputs/Calendar';
+import CountrySelect, { CountrySelectValue } from '../inputs/CountrySelect';
+import Counter from '../Counter';
 
 enum STEPS {
   LOCATION = 0,
@@ -101,10 +104,9 @@ const SearchModal = () => {
   ]);
 
   const actionLabel = useMemo(()=>{
-    if(step === STEPS.LOCATION){
+    if(step === STEPS.INFO){
       return 'Search'
     }
-
     return 'Next'
   }, [step])
 
@@ -114,13 +116,65 @@ const SearchModal = () => {
     }
     return 'Back'
   }, [step])
+
+  let bodyContent = (
+    <div className='flex flex-col gap-8'>
+      <Heading
+      title='Where do you wanna go?'
+      subtitle='Find the perfect location!'
+      />
+      <CountrySelect
+        value={location}
+        onChange={(value)=> setLocation(value as CountrySelectValue)}
+      />
+      <hr />
+      <Map center={location?.latlng}/>
+    </div>
+  )
+
+  if(step === STEPS.DATE){
+    bodyContent = (
+      <div
+      className="flex flex-col gap-8">
+        <Heading
+        title='When do you plan to go?'
+        subtitle='Make sure everyone is free!'
+        />
+        <Calendar
+          value={dateRange}
+          onChange={(value) => setDateRange(value.selection)}
+        />
+      </div>
+    )
+  }
+
+  if(step === STEPS.INFO) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+        title='More information'
+        subtitle='Find your perfect place!'/>
+
+        <Counter
+          title='Guests'
+          subtitle='How many guests are coming?'
+          value={guestCount}
+          onChange={(value) => setGuestCount(value)}
+        />
+      </div>
+    )
+  }
+
   return (
     <Modal
       isOpen={searchModal.isOpen}
       onClose={searchModal.onClose}
-      onSubmit={searchModal.onOpen}
+      onSubmit={onSubmit}
       title="Filters"
-      actionLabel="Search"
+      actionLabel={actionLabel}
+      secondaryActionLabel={secondaryActionLabel}
+      secondaryAction={step === STEPS.LOCATION ? undefined : onBack}
+      body={bodyContent}
     />
   );
 };
