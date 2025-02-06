@@ -8,10 +8,10 @@ import { formatISO } from 'date-fns';
 import dynamic from 'next/dynamic';
 import { useCallback, useMemo, useState } from 'react';
 import { Range } from 'react-date-range';
+import Counter from '../Counter';
 import Heading from '../Heading';
 import Calendar from '../inputs/Calendar';
 import CountrySelect, { CountrySelectValue } from '../inputs/CountrySelect';
-import Counter from '../Counter';
 
 enum STEPS {
   LOCATION = 0,
@@ -160,6 +160,20 @@ const SearchModal = () => {
           subtitle='How many guests are coming?'
           value={guestCount}
           onChange={(value) => setGuestCount(value)}
+        />
+
+        <Counter
+          title='Rooms'
+          subtitle='How many rooms do you need?'
+          value={roomCount}
+          onChange={(value) => setRoomCount(value)}
+        />
+
+        <Counter
+          title='Bathrooms'
+          subtitle='How many bathrooms do you need?'
+          value={bathroomCount}
+          onChange={(value) => setBathroomCount(value)}
         />
       </div>
     )
