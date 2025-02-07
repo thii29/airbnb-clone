@@ -12,7 +12,6 @@ interface HomeProps {
 const Home = async ({ searchParams }: HomeProps) => {
   const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
-  const isEmpty = true;
   if (listings.length === 0) {
     return (
       <ClientOnly>
@@ -20,6 +19,7 @@ const Home = async ({ searchParams }: HomeProps) => {
       </ClientOnly>
     );
   }
+  
   return (
     <ClientOnly>
       <Container>
