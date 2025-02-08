@@ -1,5 +1,6 @@
 'use client';
-import { DateRange, Range, RangeKeyDict } from 'react-date-range';
+import { DateRange as OriginalDateRange, DateRangeProps, Range, RangeKeyDict } from 'react-date-range';
+
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 
@@ -8,6 +9,11 @@ interface CalendarProps {
   disabledDates?: Date[];
   onChange: (value: RangeKeyDict) => void;
 }
+interface ExtendedDateRangeProps extends DateRangeProps {
+  refs?: React.RefObject<any>;  // Adjust as necessary
+}
+
+const DateRange: React.ComponentType<ExtendedDateRangeProps> = OriginalDateRange as any;
 
 const Calendar: React.FC<CalendarProps> = ({
   value,
