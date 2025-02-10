@@ -7,7 +7,7 @@ import useCountries from '../../hooks/useCountries';
 import { SafeListing, SafeReservations, SafeUser } from '../../types';
 import Button from '../Button';
 import HeartButton from '../HeartButton';
-
+import noImg from '../../../public/images/no-img.png'
 interface ListingCardProps {
   data: SafeListing;
   reservation?: SafeReservations;
@@ -70,9 +70,10 @@ const ListingCard: React.FC<ListingCardProps> = ({
           <Image
             fill
             alt="Listing"
-            src={data.imageSrc}
+            src={data.imageSrc ? data.imageSrc : noImg}
             className="object-cover h-full w-full group-hover:scale-110 transition"
           />
+
           <div className="absolute top-3 right-3">
             <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
